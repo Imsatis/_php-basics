@@ -2,19 +2,12 @@
 
 $servername="localhost";
 $user="root";
-$password="";
+$pass="";
 $dbname="userlogin";
 
-$name=$_POST['name'];
-$username=$_POST['username'];
-$email=$_POST['email'];
-$password=$_POST['password'];
+$conn= new mysqli($servername,$user,$pass,$dbname);
 
-$INSERT="INSERT INTO USERDATA(_NAME,_USERNAME,_EMAIL,_PASSWORD)VALUE('$name','$username','$email','$password')";
-
-$conn= new mysqli($servername,$user,$password,$dbname);
-
-if($conn->connect_error()){
+if($conn->connect_error) {
     echo "CONNECTION FAILED";
 }
 
@@ -23,9 +16,33 @@ else{
    #echo "CONNECTION ESTABLISHED";
 }
 
-if($conn->query($INSERT)) {
+if(isset($_POST['name']) && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']))
+{
+    $name=$_POST['name'];
+    $username=$_POST['username'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
 
-}
+    $INSERT="INSERT INTO userdata(_NAME,_USERNAME,_EMAIL,_PASSWORD)VALUE('$name','$username','$email','$password')";
+
+    if($conn->query($INSERT)) {
+
+    }
+  }
+
+  if(isset($_POST['USERNAME']) && isset($_POST['PASSWORD'])) {
+      $USERNAME=$_POST['USERNAME'];
+      $PASSWORD=$_POST['PASSWORD'];
+      $CHECK="SELECT * FROM userdata where _USERNAME='$USERNAME' AND _PASSWORD='$PASSWORD'";
+      if($result=$conn->query($CHECK)){
+           if($result->num_rows>0) {
+               echo "CORRECT PASSWORD";
+           }else echo "INCORRECT PASSWORD";  
+      }else{
+          echo "Query Fail";
+      }
+  }
+
 
 $conn->close();
 

@@ -5,18 +5,18 @@
 <body>
     
     <h1>Log In</h1>
-    <form action="" method="">
+    <form action="login.php" method="post">
          UserName:
-             <input type="text" name="username">
+             <input type="text" name="USERNAME" required>
          PassWord :
-             <input type="password" name="password">
+             <input type="password" name="PASSWORD">
              <input type="submit" name="submit" value="Log In"><br>
     </form>
 
     <h2>Sign Up</h2>
     <form action="login.php" method="post">
          Name-    
-             <input type="text" name="name">
+             <input type="text" name="name" required>
          UserName-
              <input type="text" name="username"><br>
          Email-
