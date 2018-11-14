@@ -1,5 +1,5 @@
 <?php
-$dbname="root";
+$dbname="UserLogin";
 $CREATE="CREATE DATABASE $dbname";
 $servername="localhost";
 $username="root";

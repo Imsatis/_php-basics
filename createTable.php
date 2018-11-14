@@ -3,14 +3,16 @@
 $servername="localhost";
 $username="root";
 $password="";
-$dbname="CLIENT";
+$dbname="userlogin";
 
-$TABLE= " CREATE TABLE TAB (
+$TABLE= " CREATE TABLE userData (
       _UNIQID int(5) unsigned auto_increment primary key,
-      _FNAME  varchar(255) not null,
-      _LNAME  varchar(255) not null,
+      _NAME  varchar(255) not null,
+      #_LNAME  varchar(255) not null,
+      _USERNAME  varchar(255) not null,
       _EMAIL  varchar(255),
-      _REGDATE timestamp 
+      _PASSWORD varchar(255)
+      #_REGDATE timestamp 
 )";
 
 $conn= new mysqli($servername,$username,$password,$dbname);
