@@ -1,5 +1,5 @@
 <?php
-
+#include "indexlogin.php";
 $servername="localhost";
 $user="root";
 $pass="";
@@ -53,4 +53,4 @@ if(isset($_POST['name']) && isset($_POST['username']) && isset($_POST['email']) 
 
 $conn->close();
 
-?>
+?>  
