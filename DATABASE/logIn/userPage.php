@@ -31,9 +31,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <style>
+  .black{
+      background:black;
+  }
+
+  .chat{
+    margin-left:30px;
+    font-size:20px;
+  }
+  
+  .textArea{
+      height:200px;
+      width:70%;
+      margin:40px auto;
+      background:#fff;
+  }
+  .contentwrap ul li{
+      list-style-type:none;
+      #border:2px solid red;
+      margin:10px 0 20px;
+       
+  }
+  .contentwrap ul li a{
+      text-decoration:none;
+      font-size:20px;
+  }
+  
+  </style>
+
 </head>
 <body>
         <!-------------------------------Top Wrap------------------------------>
+   <div class="black"> 
     <div class="topwrap">
           <div class="container">
               <div class="jumbotron">
@@ -55,7 +86,7 @@
                <div class="row">
                   <div class="col-md-3">
                       <!-------------------------------Php-User-List------------------------------>
-                         
+                         <span class="chat"><b>CHAT USERS</b></span>
                       <?php
                           
 $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
@@ -70,12 +101,24 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
                       ?>
 
                   </div>
-                  <div class="col-md-9"></div>
+                  <div class="col-md-9">
+                     <div class="msgbox">
+                            <?php
+                            $SELECT="SELECT * FROM USER";
+                            $results=$conn->query($SELECT);
+                               
+                            ?>
+
+                            <div class="textArea">
+                            
+                            </div>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
     </div>
-
+</div>
 
 
 </body>
