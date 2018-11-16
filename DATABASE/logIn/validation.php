@@ -9,7 +9,7 @@
  $_SESSION['username']=$_POST['username'];
  $_SESSION['password']=$_POST['password']; 
 
- $READ="SELECT * FROM user WHERE _USERNAME='s' AND _PASSWORD='{$_SESSION['password']}'";
+ $READ="SELECT * FROM user WHERE _USERNAME='{$_SESSION['username']}' AND _PASSWORD='{$_SESSION['password']}'";
 
   $results=$conn->query($READ); 
 

@@ -58,7 +58,7 @@
                          
                       <?php
                           
-                         $SELECT="SELECT * FROM USER";
+$SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
                          $results=$conn->query($SELECT);
                          if($results->num_rows>0) {
                              echo "<ul>";
