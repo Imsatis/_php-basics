@@ -19,9 +19,9 @@
   }
 
   $row=$results->fetch_assoc();
-  
 
- 
+  $_SESSION['thisUserId']=$row['_ID'];
+  $thisUserId=$_SESSION['thisUserId'];
 
  ?>
 <html lang="en">
@@ -42,8 +42,8 @@
     font-size:20px;
   }
   
-  .textArea{
-      height:200px;
+  .textWindow{
+      height:170px;
       width:70%;
       margin:40px auto;
       background:#fff;
@@ -52,11 +52,28 @@
       list-style-type:none;
       #border:2px solid red;
       margin:10px 0 20px;
+      display-inline:block;
+
        
   }
   .contentwrap ul li a{
       text-decoration:none;
       font-size:20px;
+      #border:2px solid red;
+  }
+
+  .message{
+      margin-left:110px;
+      margin-top:-30px;
+      width:55%;
+      height:80px;
+      border:0;
+      font-size:20px;
+            
+  }
+  .button{
+      margin-top:-70px;
+      margin-left:15px;
   }
   
   </style>
@@ -64,7 +81,7 @@
 </head>
 <body>
         <!-------------------------------Top Wrap------------------------------>
-   <div class="black"> 
+<div class="black"> 
     <div class="topwrap">
           <div class="container">
               <div class="jumbotron">
@@ -77,6 +94,7 @@
               </div>
           </div>
     </div>
+
      
      <!-------------------------------Top Wrap------------------------------>
 
@@ -94,7 +112,7 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
                          if($results->num_rows>0) {
                              echo "<ul>";
                               while($row=$results->fetch_assoc()){
-                                  echo "<li><a href='userPage.php?ID={$row['_ID']}'>".$row['_NAME']."</li>";
+                                  echo "<li><a href='userPage.php?targetUserId={$row['_ID']}'>".$row['_NAME']."</a></li>";
                               }echo "</ul>";
                          }   
 
@@ -102,23 +120,52 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
 
                   </div>
                   <div class="col-md-9">
-                     <div class="msgbox">
+                     <div class="msg">
                             <?php
                             $SELECT="SELECT * FROM USER";
                             $results=$conn->query($SELECT);
                                
                             ?>
 
-                            <div class="textArea">
+                            <div class="textWindow"></div>
+                            <form method="post" action="userPage.php">
+                            <textarea class="message" name="message" placeholder="Text Message"></textarea>
                             
-                            </div>
+                            <input type="submit" class="btn btn-success button" name="messages" value="send" >
+                            </form>
+
+                             
+
+                            <?php
+
+                               if(isset($_GET['targetUserId'])) {
+                                   $_SESSION['targetUserId']=$_GET['targetUserId'];
+                                }
+                      
+                              if(isset($_POST['message'])) {
+                             
+                                $message=$_POST['message'];
+                                $targetUserId=$_SESSION['targetUserId'];
+                                $uniqueKey=$thisUserId+$targetUserId;
+                                $date=date("d/M/y");
+                                $time=date("h:i a"); 
+                                $INSERT="INSERT INTO usermessage(_uniqueKey,_sendUserKey,_message,_receiveUserKey,_date,_time) VALUE('$uniqueKey','$thisUserId','$message','$targetUserId','$date','$time')";
+                                
+                                $results=$conn->query($INSERT);
+                                echo"Done";  
+                            }else{
+                                  echo "Failed";
+                              }
+                            
+                            
+                            ?>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-    </div>
-</div>
+     </div>
+   </div>
 
 
 </body>
