@@ -10,7 +10,7 @@ $TABLE= " CREATE TABLE userMessage (
       _uniqueKey int not null,
       #_LNAME  varchar(255) not null,
       _sendUserKey int not null,
-      _message int not null,
+      _message VARCHAR(255),
       _receiveUserKey int not null,
       _date DATE,
       _time VARCHAR(10)

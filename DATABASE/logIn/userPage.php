@@ -34,7 +34,11 @@
 
   <style>
   .black{
-      background:black;
+      #background:black;
+  }
+
+  .topwrap{
+      #background-color:#343A40;
   }
 
   .chat{
@@ -47,6 +51,7 @@
       width:70%;
       margin:40px auto;
       background:#fff;
+      overflow-x:auto;
   }
   .contentwrap ul li{
       list-style-type:none;
@@ -69,11 +74,34 @@
       height:80px;
       border:0;
       font-size:20px;
+      
             
+  }
+  .msgstyle span{
+      #display:block;
+      background-color:#00aff0;
+      border-radius:12px;
+      padding-left:10px;
+      padding-right:10px;
   }
   .button{
       margin-top:-70px;
       margin-left:15px;
+  }
+  .textWindow .right{
+      text-align:right;
+      
+
+  }
+  .textWindow ul li{
+      font-size:20px;
+      color:white;
+      margin:0;  
+
+  }
+  .textWindow ul{
+      #list-style-type:none;
+      padding-left:0;
   }
   
   </style>
@@ -127,7 +155,35 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
                                
                             ?>
 
-                            <div class="textWindow"></div>
+                            <div class="textWindow">
+                            
+                            <?php
+                            
+                            if(isset($_GET['targetUserId'])) {
+                                $_SESSION['targetUserId']=  $_GET['targetUserId'];
+                             $sum=$_SESSION['targetUserId']+$thisUserId;
+                                $READ="SELECT * FROM usermessage where _uniqueKey=$sum ORDER BY _OrderId";
+
+                                $results=$conn->query($READ);
+                                IF($results->num_rows>0){
+                                    echo "<ul>";
+                                    while($row=$results->fetch_assoc()){
+                                            
+                                         if($row['_sendUserKey']===$thisUserId){
+                                             echo "<li class='msgstyle left' style='text-align:left'><span>".$row['_message']."</span></li>";
+                                         } else{
+                                             echo "<li class='msgstyle right' style='text-align:right'><span>".$row['_message']."</span></li>";
+                                         }    
+                                          
+                                    }echo "</ul>";
+                                    
+                                }else echo "sorry";
+                             }
+                            
+                            ?>
+                            
+                            
+                            </div>
                             <form method="post" action="userPage.php">
                             <textarea class="message" name="message" placeholder="Text Message"></textarea>
                             
@@ -138,15 +194,14 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
 
                             <?php
 
-                               if(isset($_GET['targetUserId'])) {
-                                   $_SESSION['targetUserId']=$_GET['targetUserId'];
-                                }
+                              
                       
                               if(isset($_POST['message'])) {
                              
                                 $message=$_POST['message'];
                                 $targetUserId=$_SESSION['targetUserId'];
                                 $uniqueKey=$thisUserId+$targetUserId;
+                                date_default_timezone_set("asia/calcutta");
                                 $date=date("d/M/y");
                                 $time=date("h:i a"); 
                                 $INSERT="INSERT INTO usermessage(_uniqueKey,_sendUserKey,_message,_receiveUserKey,_date,_time) VALUE('$uniqueKey','$thisUserId','$message','$targetUserId','$date','$time')";
@@ -154,7 +209,7 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
                                 $results=$conn->query($INSERT);
                                 echo"Done";  
                             }else{
-                                  echo "Failed";
+                                  #echo "Failed";
                               }
                             
                             
