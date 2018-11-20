@@ -34,7 +34,7 @@
 
   <style>
   .black{
-      background:black;
+      #background:black;
   }
 
   .chat{
