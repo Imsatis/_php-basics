@@ -5,13 +5,15 @@ $username="root";
 $password="";
 $dbname="userlogin";
 
-$TABLE= " CREATE TABLE userData (
-      _UNIQID int(5) unsigned auto_increment primary key,
-      _NAME  varchar(255) not null,
+$TABLE= " CREATE TABLE userMessage (
+      _OrderId int unsigned auto_increment primary key,
+      _uniqueKey int not null,
       #_LNAME  varchar(255) not null,
-      _USERNAME  varchar(255) not null,
-      _EMAIL  varchar(255),
-      _PASSWORD varchar(255)
+      _sendUserKey int not null,
+      _message int not null,
+      _receiveUserKey int not null,
+      _date DATE,
+      _time VARCHAR(10)
       #_REGDATE timestamp 
 )";
 
@@ -20,7 +22,7 @@ $conn= new mysqli($servername,$username,$password,$dbname);
 if($conn->connect_error){
     echo "<h1>CONNECTION FAILED</h1> <br>";
 }else{
-    echo "<h1>CONNECTION ESTABLISHED</h1><br>";
+    echo "<h1>CONNECTION ESTABLISHED </h1><br>";
 }
 
 if($conn->query($TABLE)===TRUE) {

@@ -1,4 +1,10 @@
+
+
 <?php
+//order by 1;
+//union select 1,2,3,group_concat(database()),4,5;
+//union select 1,2,3,group_concat(table_name),4,5 from information_schema.tables where table_schema=database();
+
 $servername="localhost";
 $username="root";
 $password="";

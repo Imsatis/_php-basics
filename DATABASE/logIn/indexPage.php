@@ -96,7 +96,7 @@ $conn->close();
                            </div>
                            <div class="login right">
                            <label for="password">Password:</label><br>
-                              <input type="password" name="password" required>
+                              <input type="password" name="password" >
                             <input type="submit" class="btn btn-primary" value="Log in" name="button">
                            </div>
                        </form>
