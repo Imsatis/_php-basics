@@ -10,7 +10,7 @@
  $_SESSION['password']=$_POST['password']; 
 
  $READ="SELECT * FROM user WHERE _USERNAME='{$_SESSION['username']}' AND _PASSWORD='{$_SESSION['password']}'";
-  echo $READ;
+  #echo $READ;
 
   $results=$conn->query($READ); 
 
@@ -18,7 +18,7 @@
     header("Location: userPage.php");
       
   }  else {
-    #header("Location: indexPage.php");
+    header("Location: indexPage.php");
   }
  
  }else{
