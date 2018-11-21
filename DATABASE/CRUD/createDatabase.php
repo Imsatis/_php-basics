@@ -20,7 +20,7 @@ if($conn->connect_error) {
 
 //========================EXECUTE-QUERY============================
 
-#CREATE DATABASE QUERY
+#CREATE DATABASE QUERY , $dbName
 
 /*
 $CREATE="CREATE DATABASE $dbName";
@@ -32,7 +32,7 @@ if($conn->query($CREATE))  {
     echo "Query Failed";
 } */
 
-#CREATE TABLE QUERY
+#CREATE TABLE QUERY   
 
 $CREATE="CREATE TABLE _TEMP(
     _id INT PRIMARY KEY AUTO_INCREMENT,
@@ -44,7 +44,7 @@ $CREATE="CREATE TABLE _TEMP(
     
 )";
 
-if($conn->query($CREATE)){
+if($conn->query("$CREATE")){
 
 }else{
     echo "Query Failed";
