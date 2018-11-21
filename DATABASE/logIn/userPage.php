@@ -158,6 +158,25 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
                             <div class="textWindow">
                             
                             <?php
+
+
+                            if(isset($_POST['message'])) {
+                                                        
+                                $message=$_POST['message'];
+                                $targetUserId=$_SESSION['targetUserId'];
+                                $uniqueKey=$thisUserId+$targetUserId;
+                                date_default_timezone_set("asia/calcutta");
+                                $date=date("d/M/y");
+                                $time=date("h:i a"); 
+                                $INSERT="INSERT INTO usermessage(_uniqueKey,_sendUserKey,_message,_receiveUserKey,_date,_time) VALUE('$uniqueKey','$thisUserId','$message','$targetUserId','$date','$time')";
+                                
+                                $results=$conn->query($INSERT);
+                                #echo"Done";  
+                            }else{
+                                #echo "Failed";
+                            }
+
+
                             
                             if(isset($_GET['targetUserId'])) {
                                 $_SESSION['targetUserId']=  $_GET['targetUserId'];
@@ -180,37 +199,17 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
                                 }else echo "sorry";
                              }
                             
-                            ?>
                             
                             
-                            </div>
-                            <form method="post" action="userPage.php">
-                            <textarea class="message" name="message" placeholder="Text Message"></textarea>
                             
-                            <input type="submit" class="btn btn-success button" name="messages" value="send" >
+                     echo " </div>
+                            <form method='post' action='userPage.php?targetUserId={$_SESSION['targetUserId']}'>
+                            <textarea class='message' name='message' placeholder='Text Message'></textarea>
+                            
+                            <input type='submit' class='btn btn-success button' name='messages' value='send' >
                             </form>
-
+                           ";
                              
-
-                            <?php
-
-                              
-                      
-                              if(isset($_POST['message'])) {
-                             
-                                $message=$_POST['message'];
-                                $targetUserId=$_SESSION['targetUserId'];
-                                $uniqueKey=$thisUserId+$targetUserId;
-                                date_default_timezone_set("asia/calcutta");
-                                $date=date("d/M/y");
-                                $time=date("h:i a"); 
-                                $INSERT="INSERT INTO usermessage(_uniqueKey,_sendUserKey,_message,_receiveUserKey,_date,_time) VALUE('$uniqueKey','$thisUserId','$message','$targetUserId','$date','$time')";
-                                
-                                $results=$conn->query($INSERT);
-                                echo"Done";  
-                            }else{
-                                  #echo "Failed";
-                              }
                             
                             
                             ?>
