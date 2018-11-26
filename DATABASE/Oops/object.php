@@ -7,18 +7,31 @@ include_once "Class.php";
 $dbname="userlogin";
 $tableName="user";
 
-//-------Conncetion-Start
-
 $obj->start_connection($dbname);
+
+$obj->set_tableName($tableName);
+$obj->set_columnName();
+
+//-------Connection-Start
+
+
 
 //-------Select All
 
 
 
-echo $output = $obj->read_all($tableName);
+//$obj->read_all();
 
-#echo "heloow";
+if(isset($_GET['update'])) {
+  $id = $_GET['update'];
+  $obj->update_by_id($id);
+  
+  
+}
+
+echo $obj->read_all();
  
+
    
 
 
