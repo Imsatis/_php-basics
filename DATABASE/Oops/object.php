@@ -34,6 +34,7 @@ if($results->num_rows>0){
       #echo "$rows[]<br>";
       if($check){
         $columnName = array_keys($rows);
+        $check=false; 
        }
        $output .= "<tr>";
 
