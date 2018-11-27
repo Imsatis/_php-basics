@@ -7,12 +7,18 @@ include_once "Class.php";
 $dbname="userlogin";
 $tableName="user";
 
-//-------Conncetion-Start
-
 $obj->start_connection($dbname);
+
+$obj->set_tableName($tableName);
+$obj->set_columnName();
+
+//-------Connection-Start
+
+
 
 //-------Select All
 
+<<<<<<< HEAD
 $results = $obj->select_all($tableName);
   $output='<table>';
   $columnName='';
@@ -56,11 +62,26 @@ if($results->num_rows>0){
 
 }else{
     echo "No Recor Found";
-}
- 
+=======
+
+
+//$obj->read_all();
+
+if(isset($_GET['update'])) {
+  $id = $_GET['update'];
+  $obj->update_by_id($id);
   
+  
+>>>>>>> 5c887d48e6c922a1f4ab91a8f7185c310112b756
+}
+
+echo $obj->read_all();
+ 
+
+   
 
 
 $obj->connection_close();
+
 
 ?>
