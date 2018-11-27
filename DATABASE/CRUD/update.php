@@ -73,7 +73,7 @@ echo "<form action='update.php?ID={$row['_ID']}' method='post'>
 <input type='submit' name='submit' value='UPDATE'>
 </form>";
 }
-}
+}   
 echo "Email is ".$row['_USERNAME']."<a href='update.php?ID={$row['_ID']}&flag=2'> UPDATE</a><br><br>";
 
 if(isset($_GET['flag'])) {

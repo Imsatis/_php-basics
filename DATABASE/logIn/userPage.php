@@ -210,7 +210,7 @@ $SELECT="SELECT * FROM USER WHERE NOT _USERNAME='{$_SESSION['username']}'";
                             </form>
                            ";
                              
-                            echo "vjnkdsnfksd";
+                            //echo "vjnkdsnfksd";
                             
                             ?>
                      </div>
