@@ -14,6 +14,7 @@ if(isset($_ary['cat'])) {
 */
 if(isset($_POST['submit'])) {
     //print_r($_FILES['file']);
+    /*
 
     $target = "uploads/".$_FILES['file']['name'];
     $path = $_FILES['file']['tmp_name'];
@@ -22,6 +23,8 @@ if(isset($_POST['submit'])) {
     $options = PATHINFO_DIRNAME | PATHINFO_BASENAME | PATHINFO_EXTENSION | PATHINFO_FILENAME;
     //print_r(pathinfo("Oops/uploads/1.jpg",PATHINFO_DIRNAME | PATHINFO_BASENAME | PATHINFO_EXTENSION | PATHINFO_FILENAME));
     move_uploaded_file($path,$target);
+  */
+  print_r($_POST);
 
 }
 
@@ -34,7 +37,10 @@ if(isset($_POST['submit'])) {
 <body>
     
     <form action='' method='post' enctype='multipart/form-data'>
-        <input type='file' name='file'>
+        <input type='text' name='file'>
+        <input type='text' name='fil'>
+        <input type='text' name='fi'>
+        <input type='text' name='f'>
         <input type='submit' name='submit'>
     </form>
 

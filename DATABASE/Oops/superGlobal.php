@@ -1,5 +1,7 @@
 <?php
 
+//Post and Get method only accessable with in a same page//
+
 include_once "superGlobalTest.php";
 if(isset($_POST['submit'])) {
  
