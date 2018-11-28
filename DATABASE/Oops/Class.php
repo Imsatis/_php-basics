@@ -87,7 +87,8 @@ class MB {
           for($i=0;$i<sizeof($this->columnName);$i++) {
                $output .= "<td>".$rows[$this->columnName[$i]]."</td>";
           }
-          $output .= "<td><a href='object.php?update={$rows[$this->columnName[0]]}'>Update</a></td></tr>";
+          $output .= "<td><a href='object.php?update={$rows[$this->columnName[0]]}'>Update</a></td>
+                      <td class='red'><a href='object.php?delete={$rows[$this->columnName[0]]}'>delete</a></td></tr>";
         }
         $output .= "</table>";
          
@@ -123,7 +124,7 @@ class MB {
     
     $this->conn->query($UPDATE);
 
-      echo "<form action='object.php?update=$id' method='post'>";
+      echo "<form action='object.php?update=$id' method='post'><label><b>UPDATE</b><br></label>";
 
       $results = $this->select_by_id_columnName($id);
 
@@ -132,6 +133,76 @@ class MB {
         echo $this->columnName[$i]."<input name='feild$i' type='text' value='{$row[$this->columnName[$i]]}'>";    
     }
      echo "<input type='submit' value='update'></form>";
+  }
+
+
+
+//-------------------------Delete by Id----------------------//
+
+
+function delete_by_id($id) {
+   $DELETE = "DELETE FROM $this->tableName WHERE ".$this->columnName[0] . "=$id";
+   $results = $this->conn->query($DELETE);
+     if(!$results) {
+       echo"Not Deleted";
+     }else{
+       echo "DELETED";
+     }
+  }
+
+
+
+
+
+
+
+//-------------------------Insert Form-------------------------//
+
+
+ function insert_column(){
+
+   echo "<form action='object.php?insert=1' method='post'><label><b>INSERT</b><br></label>";
+  for($i=1;$i<sizeof($this->columnName);$i++) {
+    echo $this->columnName[$i]."<input name='feild$i' type='text' required>";    
+   }
+
+    echo "<input type='submit' name='Add' value='submit'></form>";
+
+    if(isset($_POST['Add'])) {
+      $this->insert_data();
+      
+    }
+
+ }
+
+ //-------------------------Insert Data-------------------------//
+
+
+  function insert_data() {
+
+    $columns='';
+    $values='';
+      for($i=1;$i<sizeof($this->columnName);$i++) {
+          //echo $feild="feild$i";
+          if(isset($_POST["feild$i"])) {
+              $columns .= $this->columnName[$i] . ",";
+              $values  .= "'" .$_POST["feild$i"] . "',";   ///add work values
+          } 
+          
+      }
+       $columns = rtrim($columns,', ');
+       $values = rtrim($values,', ');
+  
+       $INSERT = "INSERT INTO $this->tableName ($columns) VALUES ($values)";
+  
+       $results = $this->conn->query($INSERT);
+  
+       if(!$results) {
+        echo "NoT Inserted";
+       }else{
+        echo "INSERTED ";
+       }
+
   }
 
 

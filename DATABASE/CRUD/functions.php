@@ -5,7 +5,7 @@
 
 function connection() {
 $servername="localhost";
-$username="root";
+$username="root";        
 $password="";
 $dbName="CRUD";
 
@@ -20,7 +20,7 @@ global $conn;
 if($conn->connect_error)    {
     echo "Connection Failed";    
 }else {
-    
+     
  }
 
 }
