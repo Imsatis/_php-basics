@@ -14,7 +14,9 @@ if ($conn->connect_error) {
 }
 
 session_start();
-
+//$ALREADY='';
+//$SUCCESS='';
+//$INCORRECT='';
 if(isset($_POST['signup'])) {
    
     $array = array(
@@ -28,8 +30,10 @@ if(isset($_POST['signup'])) {
 
     if(!user_check('loginTask',$check)){
       insert_row('user',$array);
+      $SUCCESS = "<span class='green'>Succecfully Sign Up</span>";
     }else{
-        echo "already";
+        $ALREADY = "<span class='red'>User Already Exist</span>";
+
     }
 
 }
@@ -44,9 +48,11 @@ if(isset($_POST['signup'])) {
     );
         
         if(!account_verify('loginTask',$array)) {
-            echo "wrong password";
+            //echo "wrong password";
+            $INCORRECT = "<br><span class='passred'>Password Incorrect</span>";
       }else{
           $_SESSION['username'] = $_POST['username'];
+          header("location:profile.php");
       }
         
     }
@@ -61,6 +67,17 @@ if(isset($_POST['signup'])) {
     .login{
         float:left;
         margin-left:10px;
+    }
+    .red{
+        margin-left:8px;
+        color:red;
+    }
+    .green{
+        margin-left:8px;
+        color:green;
+    }
+    .passred{
+        color:red;
     }
     </style>
     </head>
@@ -79,7 +96,7 @@ if(isset($_POST['signup'])) {
               <div class="login right">
               <label for="password">Password:</label><br>
                  <input type="password" name="password" >
-               <input type="submit" class="btn btn-primary" value="Log in" name="login">
+               <input type="submit" class="btn btn-primary" value="Log in" name="login"><?php if(!empty($INCORRECT)) echo $INCORRECT;?>
               </div>
           </form>
           </div>
@@ -102,7 +119,7 @@ if(isset($_POST['signup'])) {
                     <input class="placeholder width" type="password" name="password" placeholder="New password" required>
                          
                     
-                    <input type="submit" class="btn btn-success signUp" name='signup' value="Sign Up"><?php //echo " $SUCCESSFUL";?>
+                    <input type="submit" class="btn btn-success signUp" name='signup' value="Sign Up"><?php if(!empty($ALREADY)) {echo $ALREADY;}else if(!empty($SUCCESS)){echo $SUCCESS;}?>
              </div>
         </div>
     </div>
