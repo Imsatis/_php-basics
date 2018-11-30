@@ -16,6 +16,10 @@ if(!isset($_SESSION['username'])) {
 }
 
 
+
+//$target_dir = "uploads/";
+//echo $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+
 ?>
 
 <!DOCTYPE html>

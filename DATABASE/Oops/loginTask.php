@@ -1,61 +1,63 @@
 <?php
 
-$servername="localhost";
-$username="root";
-$password="";
-$dbname="userlogin";
+    include_once "loginFunc.php";
 
+         $dbname="userlogin";
+         $tableName="loginTask";
 
+    $USER->connection_start($dbname,$tableName);
 
-$conn= new mysqli($servername,$username,$password,$dbname);
+    session_start();
 
-if ($conn->connect_error) {
-    echo "Connection Failed";    
-}
-
-session_start();
-//$ALREADY='';
-//$SUCCESS='';
-//$INCORRECT='';
-if(isset($_POST['signup'])) {
-   
+    if(!empty(isset($_POST['signup']))) {
+    
     $array = array(
+     
         'username'=>$_POST['username'],
         'email'=>$_POST['email'],
         'password'=>md5("{$_POST['password']}")
-    );
-    $check = array(
-        'username'=>$_POST['username']
+    
     );
 
-    if(!user_check('loginTask',$check)){
-      insert_row('user',$array);
-      $SUCCESS = "<span class='green'>Succecfully Sign Up</span>";
-    }else{
+    $check = array(
+    
+        'username'=>$_POST['username']
+    
+    );
+
+    if(!$USER->user_check($check)){
+        
+        $USER->insert_row('user',$array);
+        $SUCCESS = "<span class='green'>Succecfully Sign Up</span>";
+    
+     }else {
+
         $ALREADY = "<span class='red'>User Already Exist</span>";
 
     }
 
 }
 
-
    
-    if(isset($_POST['login'])) {
+    if(!empty(isset($_POST['login']))) {
         
         $array = array(
         'username'=>$_POST['username'],
-        'password'=>md5("{$_POST['password']}")
+        'password'=>md5($_POST['password'])
     );
         
-        if(!account_verify('loginTask',$array)) {
-            //echo "wrong password";
-            $INCORRECT = "<br><span class='passred'>Password Incorrect</span>";
-      }else{
-          $_SESSION['username'] = $_POST['username'];
-          header("location:profile.php");
-      }
+    if(!$USER->account_verify($array)) {
+           
+        $INCORRECT = "<br><span class='passred'>Password Incorrect</span>";
+      
+    }else {
         
+        $_SESSION['username'] = $_POST['username'];
+        header("location:profile.php");
+      
     }
+        
+ }
 
 
 ?>
@@ -66,7 +68,7 @@ if(isset($_POST['signup'])) {
     <style>
     .login{
         float:left;
-        margin-left:10px;
+        margin-left:10px; 
     }
     .red{
         margin-left:8px;
@@ -77,7 +79,7 @@ if(isset($_POST['signup'])) {
         color:green;
     }
     .passred{
-        color:red;
+        color:red;  
     }
     </style>
     </head>
@@ -129,36 +131,6 @@ if(isset($_POST['signup'])) {
 </html>   
  <?php
 
-function user_check($tableName,$check){
-     $columnName = array_keys($check);
-     $value = array_values($check);
-     $SELECT = "SELECT * FROM $tableName WHERE $columnName[0]='$value[0]'";
-     global $conn;
-     $result = $conn->query($SELECT);
-     return ($result->num_rows>0);
-}
-
-function insert_row($tablename,$array) {
-
-     
-     $columnName = implode(",",array_keys($array));
-     $values = "'".implode("','",(array_values($array)))."'";
-     $INSERT = "INSERT INTO loginTask ($columnName) VALUES ($values)";
-     global $conn;
-     $conn->query($INSERT);
-
-}
-
-function account_verify($tableName,$array) {
-    
-    $columnName = array_keys($array);
-   $values = array_values($array);
-   $VERIFY = "SELECT * FROM $tableName WHERE ".$columnName[0] ." = '". $values[0] ."' && ".$columnName[1] ." = '". $values[1]."'"; 
-    global $conn;
-    $result=$conn->query($VERIFY);  
-    return ($result->num_rows>0);
-}
-
-$conn->close();
+  $USER->connection_close()
 
 ?>
