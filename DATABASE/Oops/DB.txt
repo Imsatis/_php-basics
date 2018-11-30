@@ -1,0 +1,21 @@
+private function query($sql)
+    {
+        $result = $this->con->query($sql);
+        if ($result) {
+            if (isset($result->num_rows)) {
+                if ($result->num_rows > 0) {
+                    $arr = array();
+                    while ($row = $result->fetch_assoc()) {
+                        array_push($arr, $row);
+                    }
+                    return $arr;
+                } else {
+                    return false;
+                }
+            } else {
+                return $result;
+            }
+        } else {
+            return false;
+        }
+    }
