@@ -34,7 +34,7 @@ $INSERT="INSERT INTO _temp(_name,_lastname,_username,_password,_email) VALUE('$n
 if($conn->query($INSERT)) {
     
 }else{
-    echo "Quebry Failed";
+    echo "Query Failed";
  }
 }
 
