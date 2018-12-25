@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 $servername="localhost";
 $username="root";
@@ -34,8 +34,8 @@ if(isset($_POST['submit'])) {
     //print_r($_FILES['file']);
     
  /*
-    $target = "uploads/".$_FILES['file']['name'];
-    $path = $_FILES['file']['tmp_name'];
+    $path = $_FILES['file']
+    $target = "uploads/".$_FILES['file']['name'];['tmp_name'];
     //echo basename('C:\xampp\htdocs\project');
     //echo $_FILES["file"]["name"];
     $options = PATHINFO_DIRNAME | PATHINFO_BASENAME | PATHINFO_EXTENSION | PATHINFO_FILENAME;
