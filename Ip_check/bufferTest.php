@@ -11,51 +11,36 @@
         </body>
         </html>
 
-
 <?php
 
-$dnsbl_lookup = array(
-    "tor.ahbl.org",
-    "dnsbl.ahbl.org",
-    "bl.csma.biz",
-    "0spam.fusionzero.com",
-    "dnsbl.spfbl.net",
-    "rbl.realtimeblacklist.com",
-    "rbl.megarbl.net",
-    "all.s5h.net",
-    "srnblack.surgate.net",
-    "bl.blocklist.de",
-    "dnsbl.inps.de",
-    "ix.dnsbl.manitu.net",
-    "hostkarma.junkemailfilter.com",
-    "auth.spamrats.com",
-    "spam.spamrats.com",
-    "dyna.spamrats.com",
-    "noptr.spamrats.com",
-    "bad.psky.me",
-    "db.wpbl.info",
-    "dnsrbl.org",
-    "dnsbl.cobion.com",
-    "sbl-xbl.spamhaus.org",
-    "nomail.rhsbl.sorbs.net",
-    "badconf.rhsbl.sorbs.net",
-    "rhsbl.sorbs.net",
-    "noservers.dnsbl.sorbs.net",
-    "spam.dnsbl.sorbs.net",
-    "old.spam.dnsbl.sorbs.net",
-    "recent.spam.dnsbl.sorbs.net",
-    "new.spam.dnsbl.sorbs.net",
-    "safe.dnsbl.sorbs.net",
-    "dnsbl.proxybl.org",
-    "crawler.rbl.webiron.net",
-    "all.rbl.webiron.net",
-    "stabl.rbl.webiron.net",
-    "cabl.rbl.webiron.net",
-    "babl.rbl.webiron.net",//added
-    "bl.suomispam.net",
-    "dbl.suomispam.net",
+$ip=$_POST['ipCheck'];
+$tstart=time();
+echo $ip."<BR>";
+
+function flush_buffers()
+{ 
+    ini_set('output_buffering','on');
+    //ini_set('zlib.output_compression', 0);
+    ini_set('implicit_flush',1);
+    ini_set('max_execution_time', 0);
+    ob_implicit_flush();
+
+    //echo ("<html><head><head><body>");
+    for($i=0;$i<20;$i++) {
+       // echo $i;
+        echo str_repeat(" ", 500);
+        ob_flush();
+        flush();
+       // sleep(1);
+    }
+}
+
+function dnsbllookup($ip)
+{
+    $dnsbl_lookup=array(
     "access.redhawk.org",
     "b.barracudacentral.org",
+    "bl.csma.biz",
     "bl.emailbasura.org",
     "bl.spamcannibal.org",
     "bl.spamcop.net",
@@ -72,6 +57,7 @@ $dnsbl_lookup = array(
     "dialup.blacklist.jippg.org",
     "dialups.mail-abuse.org",
     "dialups.visi.com",
+    "dnsbl.ahbl.org",
     "dnsbl.antispam.or.id",
     "dnsbl.cyberlogic.net",
     "dnsbl.kempt.net",
@@ -96,6 +82,7 @@ $dnsbl_lookup = array(
     "no-more-funn.moensted.dk",
     "old.dnsbl.sorbs.net",
     "pbl.spamhaus.org",
+"zen.spamhaus.org",
     "proxy.bl.gweep.ca",
     "psbl.surriel.com",
     "pss.spambusters.org.ar",
@@ -114,6 +101,7 @@ $dnsbl_lookup = array(
     "spam.olsentech.net",
     "spamguard.leadmon.net",
     "spamsources.fabel.dk",
+    "tor.ahbl.org",
     "web.dnsbl.sorbs.net",
     "whois.rfc-ignorant.org",
     "xbl.spamhaus.org",
@@ -126,38 +114,57 @@ $dnsbl_lookup = array(
     "cblless.anti-spam.org.cn",
     "dnsbl.tornevall.org",
     "dnsbl.anticaptcha.net",
-    "dnsbl.dronebl.org",
-    "truncate.gbudb.net"
-);
+    "dnsbl.dronebl.org"
+    ); // Add your preferred list of DNSBL's
+    $AllCount = count($dnsbl_lookup);
+    $BadCount = 0;
+    if($ip)
+    {
+        $reverse_ip = implode(".", array_reverse(explode(".", $ip)));
+        foreach($dnsbl_lookup as $host)
+        {
+            if(checkdnsrr($reverse_ip.".".$host.".", "A"))
+            {
+               echo "<span color='#339933'>Listed on ".$reverse_ip.'.'.$host."!</span><br/>";
+                flush_buffers();
+                $BadCount++;
+            }
+            else
+            {
+//                echo "Not listed on ".$reverse_ip.'.'.$host."!<br/>";
+                flush_buffers();
+            }
+        }
+    }
+    else
+    {
+//        echo "Empty ip!<br/>";
+        flush_buffers();
+    }
 
+  echo "This ip has ".$BadCount." bad listings of ".$AllCount."!<br/>";
 
-$ip = (isset($_POST['ipCheck'])) ? $_POST['ipCheck'] : FALSE;
+    flush_buffers();
 
-ini_set('max_execution_time', 0);
+    if($BadCount==0)
+    {
+   //     include("index.php");
+ echo "Not blacklisted ";
+    }
+    else
+    {
+    //    include("default.htm");
+ echo "Blacklisted";
+    }
 
+}
 
-if ($ip) {
+if(preg_match("/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\z/",@$ip) == true)
+{
+    dnsbllookup($ip);
+}
+$tend=time();
 
-    $listed = "";
-                    
-                    foreach ($dnsbl_lookup as $hostname) {
-                       
-                        if(!ip2long($ip)){
-                            $ip = gethostbyname($ip);
-                        
-                        }
-                        $host = implode(".", array_reverse(explode('.', $ip))) . '.' . $hostname . '.';
-                        // $record = dns_get_record($host,DNS_TXT);
-                        // print_r ($record);
-                        if (checkdnsrr($host, "A")) {
-                            $listed .= $host . ' <font color="red">Listed IP = '.$ip.'</font><br /> ';
-                        }
-                    }
-
-                    if (empty($listed)) {
-                        echo 'Site is OK IP = '.$ip;
-                    } else {
-                        echo $listed;
-                    }
-                }
+$tvar=$tend-$tstart;
+echo "<BR> took $tvar seconds <br>";
 ?>
