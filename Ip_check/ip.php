@@ -1,8 +1,8 @@
 <?php
 $dnsbl_lookup = array(
-            "sbl-xbl.spamhaus.org",
-            "dnsbl.ahbl.org",
-            "bl.csma.biz", //added
+            // "sbl-xbl.spamhaus.org",
+            // "dnsbl.ahbl.org",
+            // "bl.csma.biz", //added //   
             "bl.suomispam.net",
             "dbl.suomispam.net",
             "access.redhawk.org",
@@ -26,7 +26,7 @@ $dnsbl_lookup = array(
             "dnsbl.antispam.or.id",
             "dnsbl.cyberlogic.net",
             "dnsbl.kempt.net",
-            "dnsbl.njabl.org",
+            //"dnsbl.njabl.org",
             "dnsbl.sorbs.net",
             "dnsbl-1.uceprotect.net",
             "dnsbl-2.uceprotect.net",

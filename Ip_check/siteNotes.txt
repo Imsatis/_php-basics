@@ -1,3 +1,4 @@
+35.155.142.191
 
 
 103.79.1.2
@@ -101,17 +102,77 @@ fgmail6.com
 fgmail7.com
 207.230.41.52.bl.suomispam.net. Listed IP = 52.41.230.207
 
-mg-mail1.com
-Site is OK IP = 52.35.120.32
+mg-mail1.com  
+Site is OK IP = 52.35.120.32 //dbl spamhaus
 
 mg-mail2.com
 Site is OK IP = 52.35.120.32
 
 mg-mail3.com
-Site is OK IP = 35.155.142.191
+Site is OK IP = 35.155.142.191 //dbl spamhaus
+
+191.142.155.35.tor.ahbl.org. Listed IP = 35.155.142.191
+191.142.155.35.dnsbl.ahbl.org. Listed IP = 35.155.142.191
+191.142.155.35.bl.csma.biz. Listed IP = 35.155.142.191
+191.142.155.35.dnsbl.njabl.org. Listed IP = 35.155.142.191
 
 mg-mail4.com
 Site is OK IP = 35.155.142.191
 
 mg-mail5.com
 Site is OK IP = 35.155.142.191
+
+
+
+mg-mail2.com 
+
+mg-mail2.com.multi.surbl.org. Listed IP = mg-mail2.com //different
+mg-mail2.com.tor.ahbl.org. Listed IP = mg-mail2.com
+mg-mail2.com.dnsbl.ahbl.org. Listed IP = mg-mail2.com
+mg-mail2.com.bl.csma.biz. Listed IP = mg-mail2.com
+mg-mail2.com.hostkarma.junkemailfilter.com. Listed IP = mg-mail2.com
+mg-mail2.com.dnsbl.njabl.org. Listed IP = mg-mail2.com
+
+
+52.35.120.32
+
+32.120.35.52.dbl.spamhaus.org. Listed IP = 52.35.120.32
+32.120.35.52.tor.ahbl.org. Listed IP = 52.35.120.32
+32.120.35.52.dnsbl.ahbl.org. Listed IP = 52.35.120.32
+32.120.35.52.bl.csma.biz. Listed IP = 52.35.120.32
+32.120.35.52.dnsbl.spfbl.net. Listed IP = 52.35.120.32
+32.120.35.52.dnsbl.njabl.org. Listed IP = 52.35.120.32
+
+52.35.120.32
+32.120.35.52.dbl.spamhaus.org. Listed IP = 52.35.120.32
+32.120.35.52.tor.ahbl.org. Listed IP = 52.35.120.32
+32.120.35.52.dnsbl.ahbl.org. Listed IP = 52.35.120.32
+32.120.35.52.bl.csma.biz. Listed IP = 52.35.120.32
+32.120.35.52.dnsbl.spfbl.net. Listed IP = 52.35.120.32
+32.120.35.52.dnsbl.njabl.org. Listed IP = 52.35.120.32
+
+
+mg-mail3.com
+mg-mail3.com.dbl.spamhaus.org. Listed IP = mg-mail3.com
+mg-mail3.com.tor.ahbl.org. Listed IP = mg-mail3.com
+mg-mail3.com.dnsbl.ahbl.org. Listed IP = mg-mail3.com
+mg-mail3.com.bl.csma.biz. Listed IP = mg-mail3.com
+mg-mail3.com.hostkarma.junkemailfilter.com. Listed IP = mg-mail3.com
+mg-mail3.com.dnsbl.njabl.org. Listed IP = mg-mail3.com
+
+
+
+
+35.155.142.191
+191.142.155.35.dbl.spamhaus.org. Listed IP = 35.155.142.191
+191.142.155.35.tor.ahbl.org. Listed IP = 35.155.142.191
+191.142.155.35.dnsbl.ahbl.org. Listed IP = 35.155.142.191
+191.142.155.35.bl.csma.biz. Listed IP = 35.155.142.191
+191.142.155.35.dnsbl.njabl.org. Listed IP = 35.155.142.191
+
+35.155.142.191
+191.142.155.35.dnsbl.ahbl.org. Listed IP = 35.155.142.191
+191.142.155.35.bl.csma.biz. Listed IP = 35.155.142.191
+191.142.155.35.dnsbl.njabl.org. Listed IP = 35.155.142.191
+
+

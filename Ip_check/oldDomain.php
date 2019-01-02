@@ -15,7 +15,7 @@
 <?php
 
 $dnsbl_lookup = array(
-    //"dbl.spamhaus.org",
+    "dbl.spamhaus.org",
     "list.dsbl.org",
     "multi.surbl.org",
     "tor.ahbl.org",
